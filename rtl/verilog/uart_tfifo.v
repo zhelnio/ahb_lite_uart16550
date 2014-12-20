@@ -196,32 +196,32 @@ always @(posedge clk or posedge wb_rst_i) // synchronous FIFO
 begin
 	if (wb_rst_i)
 	begin
-		top		<= #1 0;
-		bottom		<= #1 1'b0;
-		count		<= #1 0;
+		top		<= 0;
+		bottom		<= 1'b0;
+		count		<= 0;
 	end
 	else
 	if (fifo_reset) begin
-		top		<= #1 0;
-		bottom		<= #1 1'b0;
-		count		<= #1 0;
+		top		<= 0;
+		bottom		<= 1'b0;
+		count		<= 0;
 	end
   else
 	begin
 		case ({push, pop})
 		2'b10 : if (count<fifo_depth)  // overrun condition
 			begin
-				top       <= #1 top_plus_1;
-				count     <= #1 count + 1'b1;
+				top       <= top_plus_1;
+				count     <= count + 1'b1;
 			end
 		2'b01 : if(count>0)
 			begin
-				bottom   <= #1 bottom + 1'b1;
-				count	 <= #1 count - 1'b1;
+				bottom   <= bottom + 1'b1;
+				count	 <= count - 1'b1;
 			end
 		2'b11 : begin
-				bottom   <= #1 bottom + 1'b1;
-				top       <= #1 top_plus_1;
+				bottom   <= bottom + 1'b1;
+				top       <= top_plus_1;
 		        end
     default: ;
 		endcase
@@ -231,13 +231,13 @@ end   // always
 always @(posedge clk or posedge wb_rst_i) // synchronous FIFO
 begin
   if (wb_rst_i)
-    overrun   <= #1 1'b0;
+    overrun   <= 1'b0;
   else
   if(fifo_reset | reset_status) 
-    overrun   <= #1 1'b0;
+    overrun   <= 1'b0;
   else
   if(push & (count==fifo_depth))
-    overrun   <= #1 1'b1;
+    overrun   <= 1'b1;
 end   // always
 
 endmodule

@@ -194,30 +194,30 @@ reg 			 wre ;// timing control signal for write or read enable
 reg [1:0] 	 wbstate;
 always  @(posedge clk or posedge wb_rst_i)
 	if (wb_rst_i) begin
-		wb_ack_o <= #1 1'b0;
-		wbstate <= #1 0;
-		wre <= #1 1'b1;
+		wb_ack_o <= 1'b0;
+		wbstate <= 0;
+		wre <= 1'b1;
 	end else
 		case (wbstate)
 			0: begin
 				if (wb_stb_is & wb_cyc_is) begin
-					wre <= #1 0;
-					wbstate <= #1 1;
-					wb_ack_o <= #1 1;
+					wre <= 0;
+					wbstate <= 1;
+					wb_ack_o <= 1;
 				end else begin
-					wre <= #1 1;
-					wb_ack_o <= #1 0;
+					wre <= 1;
+					wb_ack_o <= 0;
 				end
 			end
 			1: begin
-			   wb_ack_o <= #1 0;
-				wbstate <= #1 2;
-				wre <= #1 0;
+			   wb_ack_o <= 0;
+				wbstate <= 2;
+				wre <= 0;
 			end
 			2,3: begin
-				wb_ack_o <= #1 0;
-				wbstate <= #1 0;
-				wre <= #1 0;
+				wb_ack_o <= 0;
+				wbstate <= 0;
+				wre <= 0;
 			end
 		endcase
 
@@ -227,27 +227,27 @@ assign re_o = ~wb_we_is & wb_stb_is & wb_cyc_is & wre ; //RE for registers
 // Sample input signals
 always  @(posedge clk or posedge wb_rst_i)
 	if (wb_rst_i) begin
-		wb_adr_is <= #1 0;
-		wb_we_is <= #1 0;
-		wb_cyc_is <= #1 0;
-		wb_stb_is <= #1 0;
-		wb_dat_is <= #1 0;
-		wb_sel_is <= #1 0;
+		wb_adr_is <= 0;
+		wb_we_is <= 0;
+		wb_cyc_is <= 0;
+		wb_stb_is <= 0;
+		wb_dat_is <= 0;
+		wb_sel_is <= 0;
 	end else begin
-		wb_adr_is <= #1 wb_adr_i;
-		wb_we_is <= #1 wb_we_i;
-		wb_cyc_is <= #1 wb_cyc_i;
-		wb_stb_is <= #1 wb_stb_i;
-		wb_dat_is <= #1 wb_dat_i;
-		wb_sel_is <= #1 wb_sel_i;
+		wb_adr_is <= wb_adr_i;
+		wb_we_is <= wb_we_i;
+		wb_cyc_is <= wb_cyc_i;
+		wb_stb_is <= wb_stb_i;
+		wb_dat_is <= wb_dat_i;
+		wb_sel_is <= wb_sel_i;
 	end
 
 `ifdef DATA_BUS_WIDTH_8 // 8-bit data bus
 always @(posedge clk or posedge wb_rst_i)
 	if (wb_rst_i)
-		wb_dat_o <= #1 0;
+		wb_dat_o <= 0;
 	else
-		wb_dat_o <= #1 wb_dat8_o;
+		wb_dat_o <= wb_dat8_o;
 
 always @(wb_dat_is)
 	wb_dat8_i = wb_dat_is;
@@ -258,15 +258,15 @@ assign wb_adr_int = wb_adr_is;
 // put output to the correct byte in 32 bits using select line
 always @(posedge clk or posedge wb_rst_i)
 	if (wb_rst_i)
-		wb_dat_o <= #1 0;
+		wb_dat_o <= 0;
 	else if (re_o)
 		case (wb_sel_is)
-			4'b0001: wb_dat_o <= #1 {24'b0, wb_dat8_o};
-			4'b0010: wb_dat_o <= #1 {16'b0, wb_dat8_o, 8'b0};
-			4'b0100: wb_dat_o <= #1 {8'b0, wb_dat8_o, 16'b0};
-			4'b1000: wb_dat_o <= #1 {wb_dat8_o, 24'b0};
-			4'b1111: wb_dat_o <= #1 wb_dat32_o; // debug interface output
- 			default: wb_dat_o <= #1 0;
+			4'b0001: wb_dat_o <= {24'b0, wb_dat8_o};
+			4'b0010: wb_dat_o <= {16'b0, wb_dat8_o, 8'b0};
+			4'b0100: wb_dat_o <= {8'b0, wb_dat8_o, 16'b0};
+			4'b1000: wb_dat_o <= {wb_dat8_o, 24'b0};
+			4'b1111: wb_dat_o <= wb_dat32_o; // debug interface output
+ 			default: wb_dat_o <= 0;
 		endcase // case(wb_sel_i)
 
 reg [1:0] wb_adr_int_lsb;
