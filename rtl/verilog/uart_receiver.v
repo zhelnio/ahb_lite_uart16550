@@ -257,7 +257,7 @@ wire 		rcounter16_eq_7 = (rcounter16 == 4'd7);
 wire		rcounter16_eq_0 = (rcounter16 == 4'd0);
 wire		rcounter16_eq_1 = (rcounter16 == 4'd1);
 
-wire [3:0] rcounter16_minus_1 = rcounter16 - 1'b1;
+wire [3:0] rcounter16_minus_1 = rcounter16 - 3'd1;
 
 parameter  sr_idle 					= 4'd0;
 parameter  sr_rec_start 			= 4'd1;
@@ -351,7 +351,7 @@ begin
 				else		// else we have more bits to read
 				begin
 					rstate <= sr_rec_bit;
-					rbit_counter <= rbit_counter - 1'b1;
+					rbit_counter <= rbit_counter - 3'd1;
 				end
 				rcounter16 <= 4'b1110;
 			end
