@@ -214,10 +214,15 @@ always  @(posedge clk or posedge wb_rst_i)
 				wbstate <= 2;
 				wre <= 0;
 			end
-			2,3: begin
+			2: begin
+				wb_ack_o <= 0;
+				wbstate <= 3;
+				wre <= 0;
+			end
+			3: begin
 				wb_ack_o <= 0;
 				wbstate <= 0;
-				wre <= 0;
+				wre <= 1;
 			end
 		endcase
 
