@@ -154,7 +154,7 @@ module uart_top	(
 	, baud_o
 `endif
 	);
-
+parameter SIM = 0;
 parameter 							 uart_data_width = `UART_DATA_WIDTH;
 parameter 							 uart_addr_width = `UART_ADDR_WIDTH;
 parameter debug = 0;
@@ -266,7 +266,7 @@ uart_wb		wb_interface(
 `endif
 
 // Registers
-uart_regs	regs(
+uart_regs #(.SIM (SIM))	regs(
 	.clk(		wb_clk_i		),
 	.wb_rst_i(	wb_rst_i	),
 	.wb_addr_i(	wb_adr_int	),

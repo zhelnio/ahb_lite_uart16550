@@ -228,7 +228,9 @@
 `define UART_DL1 7:0
 `define UART_DL2 15:8
 
-module uart_regs (clk,
+module uart_regs
+#(parameter SIM = 0)
+ (clk,
 	wb_rst_i, wb_addr_i, wb_dat_i, wb_dat_o, wb_we_i, wb_re_i, 
 
 // additional signals
@@ -378,7 +380,7 @@ reg  [7:0]                block_value; // One character length minus stop bit
 // Transmitter Instance
 wire serial_out;
 
-uart_transmitter transmitter(clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable, serial_out, tstate, tf_count, tx_reset, lsr_mask);
+uart_transmitter #(.SIM (SIM)) transmitter(clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable, serial_out, tstate, tf_count, tx_reset, lsr_mask);
 
   // Synchronizing and sampling serial RX input
   uart_sync_flops    i_uart_sync_flops
