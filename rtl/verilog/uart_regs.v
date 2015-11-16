@@ -753,7 +753,7 @@ begin
     block_cnt <= 8'd0;
   else
   if(lsr5r & fifo_write)  // THRE bit set & write to fifo occured
-    block_cnt <= block_value;
+    block_cnt <= SIM ? 1 : block_value;
   else
   if (enable & block_cnt != 8'b0)  // only work on enable times
     block_cnt <= block_cnt - 8'd1;  // decrement break counter
