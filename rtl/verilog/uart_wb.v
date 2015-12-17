@@ -134,9 +134,6 @@
 // Company: Flextronics Semiconductor
 //
 
-// synopsys translate_off
-`include "timescale.v"
-// synopsys translate_on
 `include "uart_defines.v"
  
 module uart_wb (clk, wb_rst_i, 

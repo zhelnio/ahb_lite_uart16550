@@ -48,7 +48,6 @@
 
 
 `include "uart_testbench_defines.v"
-`include "timescale.v"
 
 module uart_device
 (

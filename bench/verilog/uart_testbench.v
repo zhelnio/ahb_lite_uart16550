@@ -49,7 +49,6 @@
 `include "uart_defines.v"
 `include "uart_testbench_defines.v"
 `include "wb_model_defines.v"
-`include "timescale.v"
 
 module testbench;
 

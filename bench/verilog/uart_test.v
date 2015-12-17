@@ -74,7 +74,6 @@
 //
 //
 //`define DATA_BUS_WIDTH_8
-`include "timescale.v"
 module uart_test ();
 
 `include "uart_defines.v"

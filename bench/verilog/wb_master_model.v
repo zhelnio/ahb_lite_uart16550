@@ -47,7 +47,6 @@
 
 
 `include "wb_model_defines.v"
-`include "timescale.v"
 
 module wb_master_model
 (

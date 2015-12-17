@@ -64,10 +64,6 @@
 // $Log: not supported by cvs2svn $
 //
 
-
-`include "timescale.v"
-
-
 module uart_sync_flops
 (
   // internal signals

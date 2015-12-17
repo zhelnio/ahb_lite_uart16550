@@ -189,10 +189,6 @@
 //
 //
 
-// synopsys translate_off
-`include "timescale.v"
-// synopsys translate_on
-
 `include "uart_defines.v"
 
 module uart_receiver (clk, wb_rst_i, lcr, rf_pop, srx_pad_i, enable, 

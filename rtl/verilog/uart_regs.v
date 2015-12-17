@@ -219,10 +219,6 @@
 //
 //
 
-// synopsys translate_off
-`include "timescale.v"
-// synopsys translate_on
-
 `include "uart_defines.v"
 
 `define UART_DL1 7:0

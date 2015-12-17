@@ -48,7 +48,6 @@
 
 `include "uart_defines.v"
 `include "uart_testbench_defines.v"
-`include "timescale.v"
 
 module testcase;
 
