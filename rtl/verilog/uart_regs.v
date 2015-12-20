@@ -233,11 +233,6 @@ module uart_regs
 	modem_inputs,
 	stx_pad_o, srx_pad_i,
 
-`ifdef DATA_BUS_WIDTH_8
-`else
-// debug interface signals	enabled
-ier, iir, fcr, mcr, lcr, msr, lsr, rf_count, tf_count, tstate, rstate,
-`endif				
 	rts_pad_o, dtr_pad_o, int_o
 `ifdef UART_HAS_BAUDRATE_OUTPUT
 	, baud_o
@@ -247,7 +242,7 @@ ier, iir, fcr, mcr, lcr, msr, lsr, rf_count, tf_count, tstate, rstate,
 
 input 									clk;
 input 									wb_rst_i;
-input [`UART_ADDR_WIDTH-1:0] 		wb_addr_i;
+input [2:0] 		wb_addr_i;
 input [7:0] 							wb_dat_i;
 output [7:0] 							wb_dat_o;
 input 									wb_we_i;
@@ -264,23 +259,6 @@ output 									int_o;
 output	baud_o;
 `endif
 
-`ifdef DATA_BUS_WIDTH_8
-`else
-// if 32-bit databus and debug interface are enabled
-output [3:0]							ier;
-output [3:0]							iir;
-output [1:0]							fcr;  /// bits 7 and 6 of fcr. Other bits are ignored
-output [4:0]							mcr;
-output [7:0]							lcr;
-output [7:0]							msr;
-output [7:0] 							lsr;
-output [`UART_FIFO_COUNTER_W-1:0] 	rf_count;
-output [`UART_FIFO_COUNTER_W-1:0] 	tf_count;
-output [2:0] 							tstate;
-output [3:0] 							rstate;
-
-`endif
-
 wire [3:0] 								modem_inputs;
 reg 										enable;
 `ifdef UART_HAS_BAUDRATE_OUTPUT
@@ -294,7 +272,7 @@ wire 										srx_pad;
 
 reg [7:0] 								wb_dat_o;
 
-wire [`UART_ADDR_WIDTH-1:0] 		wb_addr_i;
+wire [2:0] 		wb_addr_i;
 wire [7:0] 								wb_dat_i;
 
 

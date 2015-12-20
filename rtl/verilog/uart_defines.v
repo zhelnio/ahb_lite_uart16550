@@ -128,20 +128,6 @@
 //
 //
 
-// remove comments to restore to use the new version with 8 data bit interface
-// in 32bit-bus mode, the wb_sel_i signal is used to put data in correct place
-// also, in 8-bit version there'll be no debugging features included
-// CAUTION: doesn't work with current version of OR1200
-//`define DATA_BUS_WIDTH_8
-
-`ifdef DATA_BUS_WIDTH_8
- `define UART_ADDR_WIDTH 3
- `define UART_DATA_WIDTH 8
-`else
- `define UART_ADDR_WIDTH 5
- `define UART_DATA_WIDTH 32
-`endif
-
 // Uncomment this if you want your UART to have
 // 16xBaudrate output port.
 // If defined, the enable signal will be used to drive baudrate_o signal
@@ -150,18 +136,18 @@
 // `define UART_HAS_BAUDRATE_OUTPUT
 
 // Register addresses
-`define UART_REG_RB	`UART_ADDR_WIDTH'd0	// receiver buffer
-`define UART_REG_TR  `UART_ADDR_WIDTH'd0	// transmitter
-`define UART_REG_IE	`UART_ADDR_WIDTH'd1	// Interrupt enable
-`define UART_REG_II  `UART_ADDR_WIDTH'd2	// Interrupt identification
-`define UART_REG_FC  `UART_ADDR_WIDTH'd2	// FIFO control
-`define UART_REG_LC	`UART_ADDR_WIDTH'd3	// Line Control
-`define UART_REG_MC	`UART_ADDR_WIDTH'd4	// Modem control
-`define UART_REG_LS  `UART_ADDR_WIDTH'd5	// Line status
-`define UART_REG_MS  `UART_ADDR_WIDTH'd6	// Modem status
-`define UART_REG_SR  `UART_ADDR_WIDTH'd7	// Scratch register
-`define UART_REG_DL1	`UART_ADDR_WIDTH'd0	// Divisor latch bytes (1-2)
-`define UART_REG_DL2	`UART_ADDR_WIDTH'd1
+`define UART_REG_RB	3'd0	// receiver buffer
+`define UART_REG_TR  3'd0	// transmitter
+`define UART_REG_IE	3'd1	// Interrupt enable
+`define UART_REG_II  3'd2	// Interrupt identification
+`define UART_REG_FC  3'd2	// FIFO control
+`define UART_REG_LC	3'd3	// Line Control
+`define UART_REG_MC	3'd4	// Modem control
+`define UART_REG_LS  3'd5	// Line status
+`define UART_REG_MS  3'd6	// Modem status
+`define UART_REG_SR  3'd7	// Scratch register
+`define UART_REG_DL1	3'd0	// Divisor latch bytes (1-2)
+`define UART_REG_DL2	3'd1
 
 // Interrupt Enable register bits
 `define UART_IE_RDA	0	// Received Data available interrupt
