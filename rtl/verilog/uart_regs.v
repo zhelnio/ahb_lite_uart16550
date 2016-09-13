@@ -727,7 +727,7 @@ begin
     block_cnt <= 8'd0;
   else
   if(lsr5r & fifo_write)  // THRE bit set & write to fifo occured
-    block_cnt <= SIM ? 1 : block_value;
+    block_cnt <= SIM ? 8'd1 : block_value;
   else
   if (enable & block_cnt != 8'b0)  // only work on enable times
     block_cnt <= block_cnt - 8'd1;  // decrement break counter
@@ -844,7 +844,7 @@ begin
 					ti_int_pnd		? ~fifo_read					:
 					thre_int_pnd	? !(fifo_write & iir_read) :
 					ms_int_pnd		? ~msr_read						:
-					0;	// if no interrupt are pending
+					1'd0;	// if no interrupt are pending
 end
 
 
