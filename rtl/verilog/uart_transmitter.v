@@ -198,12 +198,12 @@ uart_tfifo fifo_tx(	// error bit signal is not used in transmitter FIFO
 
 // TRANSMITTER FINAL STATE MACHINE
 
-parameter s_idle        = 3'd0;
-parameter s_send_start  = 3'd1;
-parameter s_send_byte   = 3'd2;
-parameter s_send_parity = 3'd3;
-parameter s_send_stop   = 3'd4;
-parameter s_pop_byte    = 3'd5;
+localparam s_idle        = 3'd0;
+localparam s_send_start  = 3'd1;
+localparam s_send_byte   = 3'd2;
+localparam s_send_parity = 3'd3;
+localparam s_send_stop   = 3'd4;
+localparam s_pop_byte    = 3'd5;
 
 always @(posedge clk or posedge wb_rst_i)
 begin
