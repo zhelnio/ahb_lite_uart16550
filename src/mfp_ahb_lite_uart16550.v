@@ -5,7 +5,7 @@
 
 module mfp_ahb_lite_uart16550(
     //ABB-Lite side
-    input                               HCLK,    
+    input                               HCLK,
     input                               HRESETn,
     input       [ 31 : 0 ]              HADDR,
     input       [  2 : 0 ]              HBURST,
@@ -22,16 +22,16 @@ module mfp_ahb_lite_uart16550(
     input                               SI_Endian,  // ignored
 
     //UART side
-    input 								srx_pad_i;
-    output 								stx_pad_o;
+    input                               srx_pad_i;
+    output                              stx_pad_o;
 
     //UART Modem side
-    output 								rts_pad_o;
-    input 								cts_pad_i;
-    output 								dtr_pad_o;
-    input 								dsr_pad_i;
-    input 								ri_pad_i;
-    input 								dcd_pad_i;
+    output                              rts_pad_o;
+    input                               cts_pad_i;
+    output                              dtr_pad_o;
+    input                               dsr_pad_i;
+    input                               ri_pad_i;
+    input                               dcd_pad_i;
 
     //UART baudrate output
     output                              baud_o;
