@@ -229,16 +229,10 @@ module uart_regs
  (clk,
 	wb_rst_i, wb_addr_i, wb_dat_i, wb_dat_o, wb_we_i, wb_re_i, 
 
-// additional signals
+	// additional signals
 	modem_inputs,
-	stx_pad_o, srx_pad_i,
-
-	rts_pad_o, dtr_pad_o, int_o
-`ifdef UART_HAS_BAUDRATE_OUTPUT
-	, baud_o
-`endif
-
-	);
+	stx_pad_o, srx_pad_i, rts_pad_o, dtr_pad_o, int_o, baud_o
+);
 
 input 									clk;
 input 									wb_rst_i;
@@ -255,16 +249,12 @@ input [3:0] 							modem_inputs;
 output 									rts_pad_o;
 output 									dtr_pad_o;
 output 									int_o;
-`ifdef UART_HAS_BAUDRATE_OUTPUT
-output	baud_o;
-`endif
+output									baud_o;
 
 wire [3:0] 								modem_inputs;
-reg 										enable;
-`ifdef UART_HAS_BAUDRATE_OUTPUT
-assign baud_o = enable; // baud_o is actually the enable signal
-`endif
+reg 									enable;
 
+assign baud_o = enable; // baud_o is actually the enable signal
 
 wire 										stx_pad_o;		// received from transmitter module
 wire 										srx_pad_i;
