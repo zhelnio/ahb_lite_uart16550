@@ -53,6 +53,8 @@ module ahb_lite_uart16550(
     reg  [ 2:0 ]    ADDR_old;
     wire [ 2:0 ]    ADDR = HADDR [ 4:2 ];
     wire [ 7:0 ]    ReadData;
+
+    parameter       HTRANS_IDLE       = 2'b0;
     wire            NeedAction = HTRANS != HTRANS_IDLE && HSEL;
 
     always @ (posedge HCLK) begin
@@ -88,8 +90,8 @@ module ahb_lite_uart16550(
         .clk            (   HCLK            ),
         .wb_rst_i       (   ~HRESETn        ),
         .wb_addr_i      (   ActionAddr      ),
-        .wb_dat_i       (   ReadData        ),
-        .wb_dat_o       (   WriteData       ),
+        .wb_dat_i       (   WriteData       ),
+        .wb_dat_o       (   ReadData        ),
         .wb_we_i        (   WriteAction     ),
         .wb_re_i        (   ReadAction      ),
         .modem_inputs   (   { UART_CTS, UART_DSR, UART_RI, UART_DCD }   ),
