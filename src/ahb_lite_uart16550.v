@@ -84,7 +84,6 @@ module ahb_lite_uart16550(
     wire            ReadAction  = (State == S_HR_READY) && NeedAction;
 
     // TODO:
-    // turn always on UART_HAS_BAUDRATE_OUTPUT
     // change SIM to `SIMULATION
 
     // Registers
