@@ -148,7 +148,6 @@
 `include "uart_defines.v"
 
 module uart_transmitter
-#(parameter SIM = 0)
  (clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable,	stx_pad_o, tstate, tf_count, tx_reset, lsr_mask);
 
 input 										clk;
@@ -219,7 +218,7 @@ begin
 	bit_counter <= 3'b0;
   end
   else
-  if (enable | SIM)
+  if (enable)
   begin
 	case (tstate)
 	s_idle	 :	if (~|tf_count) // if tf_count==0
@@ -269,11 +268,11 @@ begin
 				else
 					counter <= counter - 5'd1;
 				stx_o_tmp <= 1'b0;
-				if (SIM) begin
-					tstate <= s_idle;
-					$write("%c", tf_data_out);
-					$fflush(32'h80000001);
-				end
+				// if (SIM) begin
+				// 	tstate <= s_idle;
+				// 	$write("%c", tf_data_out);
+				// 	$fflush(32'h80000001);
+				// end
 			end
 	s_send_byte :	begin
 				if (~|counter)

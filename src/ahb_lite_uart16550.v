@@ -83,9 +83,6 @@ module ahb_lite_uart16550(
     wire            WriteAction = (State == S_WR_WAIT)  && HSEL;
     wire            ReadAction  = (State == S_HR_READY) && NeedAction;
 
-    // TODO:
-    // change SIM to `SIMULATION
-
     // Registers
     uart_regs   regs(
         .clk            (   HCLK            ),

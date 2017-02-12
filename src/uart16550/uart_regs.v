@@ -225,7 +225,6 @@
 `define UART_DL2 15:8
 
 module uart_regs
-#(parameter SIM = 0)
  (clk,
 	wb_rst_i, wb_addr_i, wb_dat_i, wb_dat_o, wb_we_i, wb_re_i, 
 
@@ -344,7 +343,7 @@ reg  [7:0]                block_value; // One character length minus stop bit
 // Transmitter Instance
 wire serial_out;
 
-uart_transmitter #(.SIM (SIM)) transmitter(clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable, serial_out, tstate, tf_count, tx_reset, lsr_mask);
+uart_transmitter transmitter(clk, wb_rst_i, lcr, tf_push, wb_dat_i, enable, serial_out, tstate, tf_count, tx_reset, lsr_mask);
 
   // Synchronizing and sampling serial RX input
   uart_sync_flops    i_uart_sync_flops
@@ -717,7 +716,7 @@ begin
     block_cnt <= 8'd0;
   else
   if(lsr5r & fifo_write)  // THRE bit set & write to fifo occured
-    block_cnt <= SIM ? 8'd1 : block_value;
+    block_cnt <= block_value;
   else
   if (enable & block_cnt != 8'b0)  // only work on enable times
     block_cnt <= block_cnt - 8'd1;  // decrement break counter
