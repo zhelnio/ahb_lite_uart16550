@@ -47,16 +47,16 @@ module ahb_lite_uart16550(
     
     reg  [ 1:0 ]    State, Next;
 
-    assign      HRESP       = 1'b0;
+    assign      HRESP  = 1'b0;
     assign      HREADY = (State == S_HR_READY);
 
     reg  [ 2:0 ]    ADDR_old;
     wire [ 2:0 ]    ADDR = HADDR [ 4:2 ];
     wire [ 7:0 ]    ReadData;
-    wire            NeedAction = HTRANS != HTRANS_IDLE;
+    wire            NeedAction = HTRANS != HTRANS_IDLE && HSEL;
 
     always @ (posedge HCLK) begin
-        if (~HRESETn || ~HSEL)
+        if (~HRESETn)
             State <= S_INIT;
         else
             State <= Next;
@@ -80,7 +80,7 @@ module ahb_lite_uart16550(
 
     wire [ 2:0 ]    ActionAddr  = (State == S_WR_WAIT) ? ADDR_old : ADDR;
     wire [ 7:0 ]    WriteData   = HWDATA [ 7:0 ];
-    wire            WriteAction = (State == S_WR_WAIT);
+    wire            WriteAction = (State == S_WR_WAIT)  && HSEL;
     wire            ReadAction  = (State == S_HR_READY) && NeedAction;
 
     // TODO:
