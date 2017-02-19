@@ -5,4 +5,4 @@ TODO:
 - [x] standalone work in simulator
 - [x] work as a part of MIPSfpga+ [in simulator] (https://github.com/zhelnio/mipsfpga-plus/tree/de10_lite)
 - [x] work as a part of MIPSfpga+ [on hardware] (https://github.com/zhelnio/mipsfpga-plus/tree/de10_lite) (Terasic de10-lite board)
-- [ ] merge to [MIPSfpga+ repository] (https://github.com/MIPSfpga/mipsfpga-plus)
+- [x] merge to [MIPSfpga+ repository] (https://github.com/MIPSfpga/mipsfpga-plus)
