@@ -97,7 +97,7 @@ module ahb_lite_uart16550(
         //io
         case(State)
             default     :   conf = { 2'b00, 8'b0     };
-            S_READ      :   conf = { 2'b10, ADDR     };
+            S_READ      :   conf = { 2'b10, ADDR_old };
             S_WRITE     :   conf = { 2'b01, ADDR_old };
         endcase
     end
